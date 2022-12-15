@@ -1,6 +1,6 @@
 <?php
 
-function show_something()
+function showSomething() : string
 {
     return 'SOMETHING';
 }

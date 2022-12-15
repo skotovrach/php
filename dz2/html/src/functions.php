@@ -1,31 +1,22 @@
 <?php
 
-function show_something()
-{
-    return 'SOMETHING';
-}
-
 function task1(array $array, bool $fork = false)
 {
-    echo '<br>';
+    $result = null;
+
     if ($fork === true) {
-        foreach ($array as $key => $value) {
-            echo '<p>' . $value . '</p>';
-        }
+        $result = implode( "<p>", $array );
     } else {
-        $result = null;
-        foreach ($array as $value) {
-            $result .= $value;
-        }
-        return $result;
+        $result = implode($array);
     }
+    return $result;
 }
 
 
-function task2_calc_everything()
+function task2()
 {
     $arr = func_get_args();
-    $condition= $arr[0] == '*' || $arr[0] == '+' || $arr[0] =='/';
+    $condition = $arr[0] == '*' || $arr[0] == '+' || $arr[0] =='/' || $arr[0] =='-';
     if ($condition) {
         switch ($arr[0]) {
             case '*':
@@ -36,14 +27,31 @@ function task2_calc_everything()
                 break;
             case '/':
                 $result = 1;
-                for ($i = 1; $i < func_num_args(); $i++) {
-                    $result /= $arr[$i];
+                foreach($arr as $key => $value) {
+//                    var_export($value);
+                    if ($value ===0) {
+                        $result = "error";
+                        break;
+                    }
                 }
+                if ($result == "error") {
+                    $result = "Деление на ноль недопустимо";
+                } else {
+                    for ($i = 1; $i < func_num_args(); $i++) {
+                        $result /= $arr[$i];
+                }
+            }
                 break;
             case '+':
                 $result = 0;
                 for ($i = 1; $i < func_num_args(); $i++) {
                     $result += $arr[$i];
+                }
+                break;
+            case '-':
+                $result = 0;
+                for ($i = 1; $i < func_num_args(); $i++) {
+                    $result -= $arr[$i];
                 }
                 break;
         }
@@ -54,7 +62,7 @@ function task2_calc_everything()
 }
 
 
-function task3_create_table($arg1, $arg2)
+function task3($arg1, $arg2)
 {
     $check = is_int($arg1) && is_int($arg2);
     if ($check) {
@@ -71,14 +79,14 @@ function task3_create_table($arg1, $arg2)
         $arr2 = createArray($arg2);
 
         echo "<table style = 'text-align: center;'>";
-        $start_index = 1;
-        while ($start_index <= $arg2) {
+        $startIndex = 1;
+        while ($startIndex <= $arg2) {
             echo "<tr>";
             foreach ($arr1 as $key => $value) {
-                $result = $value * $arr2[$start_index];
+                $result = $value * $arr2[$startIndex];
                 echo "<td>$result</td> ";
             }
-            $start_index +=1;
+            $startIndex +=1;
             echo "</tr>";
         }
         echo "</table>";
@@ -87,7 +95,15 @@ function task3_create_table($arg1, $arg2)
     }
 }
 
-
-function task4_open_it($arg) {
-    echo file_get_contents($arg);
+function task4($strPart, $strPartNew, $string) {
+    $result = str_replace($strPart, $strPartNew, $string);
+    echo $result . "<br>";
 }
+
+
+
+function task5(string $fileName, string $text) {
+    file_put_contents($fileName, $text);
+    echo file_get_contents($fileName);
+}
+

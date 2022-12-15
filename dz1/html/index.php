@@ -28,7 +28,7 @@ echo "</p>";
 
 echo '<h3>Задание #3</h3>';
 
-$age = 15;
+$age = mt_rand(-10, 100);
 if ($age >= 18 && $age <= 65) {
     print('Вам еще работать и работать');
 } elseif ($age > 65) {
@@ -41,7 +41,12 @@ if ($age >= 18 && $age <= 65) {
 
 echo '<h3>Задание #4</h3>';
 
-$day = 1;
+$day = random_int(1, 8);
+
+$showDay = function($day) {
+    echo "$day" . "-й день недели? ";
+};
+$showDay($day);
 switch ($day) {
     case 1:
     case 2:
@@ -92,8 +97,8 @@ $cars = array (
 
 foreach ($cars as $key => $value) {
     echo "CAR " . $key . '<br>';
-    foreach ($value as $key => $value) {
-        echo $value . ' ';
+    foreach ($value as $keyInner => $valueInner) {
+        echo $valueInner . ' ';
     }
     echo '<br>';
     echo '<br>';
@@ -101,17 +106,17 @@ foreach ($cars as $key => $value) {
 
 echo '<h3>Задание #6</h3>';
 echo "<table style='text-align: center'>";
-$row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-$column = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+//$row = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+$row = $column = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 for ($i = 0; $i< 10; $i++) {
-    $number_row = $row[$i];
+    $numberRow = $row[$i];
     echo "<tr>";
     for ($key = 0; $key< 10; $key++) {
-        $number_column = $column[$key];
-        $number = $number_row * $number_column;
-        if ($number_row % 2 == 0 && $number_column % 2 == 0) {
+        $numberColumn = $column[$key];
+        $number = $numberRow * $numberColumn;
+        if ($numberRow % 2 == 0 && $numberColumn % 2 == 0) {
             echo "<td>" . '(' . $number . ')' . "</td>";
-        } elseif ($number_row % 2 != 0 && $number_column % 2 != 0) {
+        } elseif ($numberRow % 2 != 0 && $numberColumn % 2 != 0) {
             echo "<td>" . '[' . $number . ']' . "</td>";
         } else {
             echo "<td>" . $number . "</td>";
